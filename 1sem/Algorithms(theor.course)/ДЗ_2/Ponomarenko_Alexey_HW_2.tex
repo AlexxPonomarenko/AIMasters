@@ -1,0 +1,380 @@
+\documentclass[12pt]{extreport}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}        % Кодировка входного документа;
+                                    % при необходимости, вместо cp1251
+                                    % можно указать cp866 (Alt-кодировка
+                                    % DOS) или koi8-r.
+
+\usepackage[english,russian]{babel} % Включение русификации, русских и
+                                    % английских стилей и переносов
+%%\usepackage{a4}
+%%\usepackage{moreverb}
+\usepackage{amsmath,amsfonts,amsthm,amssymb,amsbsy,amstext,amscd,amsxtra,multicol}
+\usepackage{indentfirst}
+\usepackage{verbatim}
+\usepackage{tikz} %Рисование автоматов
+\usetikzlibrary{automata,positioning}
+\usepackage{multicol} %Несколько колонок
+\usepackage{graphicx}
+\usepackage[colorlinks,urlcolor=blue]{hyperref}
+\usepackage[stable]{footmisc}
+
+%% \voffset-5mm
+%% \def\baselinestretch{1.44}
+\renewcommand{\theequation}{\arabic{equation}}
+\def\hm#1{#1\nobreak\discretionary{}{\hbox{$#1$}}{}}
+\newtheorem{Lemma}{Лемма}
+\newtheorem{Remark}{Замечание}
+%%\newtheorem{Def}{Определение}
+\newtheorem{Claim}{Утверждение}
+\newtheorem{Cor}{Следствие}
+\newtheorem{Theorem}{Теорема}
+\theoremstyle{definition}
+\newtheorem{Example}{Пример}
+\newtheorem*{known}{Теорема}
+\def\proofname{Доказательство}
+\theoremstyle{definition}
+\newtheorem{Def}{Определение}
+
+%% \newenvironment{Example} % имя окружения
+%% {\par\noindent{\bf Пример.}} % команды для \begin
+%% {\hfill$\scriptstyle\qed$} % команды для \end
+
+
+
+
+
+
+%\date{22 июня 2011 г.}
+\let\leq\leqslant
+\let\geq\geqslant
+\def\MT{\mathrm{MT}}
+%Обозначения ``ажуром''
+\def\BB{\mathbb B}
+\def\CC{\mathbb C}
+\def\RR{\mathbb R}
+\def\SS{\mathbb S}
+\def\ZZ{\mathbb Z}
+\def\NN{\mathbb N}
+\def\FF{\mathbb F}
+%греческие буквы
+\let\epsilon\varepsilon
+\let\es\varnothing
+\let\eps\varepsilon
+\let\al\alpha
+\let\sg\sigma
+\let\ga\gamma
+\let\ph\varphi
+\let\om\omega
+\let\ld\lambda
+\let\Ld\Lambda
+\let\vk\varkappa
+\let\Om\Omega
+\def\abstractname{}
+
+\def\R{{\cal R}}
+\def\A{{\cal A}}
+\def\B{{\cal B}}
+\def\C{{\cal C}}
+\def\D{{\cal D}}
+
+%классы сложности
+\def\REG{{\mathsf{REG}}}
+\def\CFL{{\mathsf{CFL}}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Problems macros  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%% Enumerations %%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Rnum}[1]{\expandafter{\romannumeral #1\relax}}
+\newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+%%%%%%%%%%%%%%%%%%%%% EOF Enumerations %%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{xparse}
+\usepackage{ifthen}
+\usepackage{bm} %%% bf in math mode
+\usepackage{color}
+%\usepackage[usenames,dvipsnames]{xcolor}
+
+\definecolor{Gray555}{HTML}{555555}
+\definecolor{Gray444}{HTML}{444444}
+\definecolor{Gray333}{HTML}{333333}
+
+
+\newcounter{problem}
+\newcounter{uproblem}
+\newcounter{subproblem}
+\newcounter{prvar}
+
+\def\beforPRskip{
+	\bigskip
+	%\vspace*{2ex}
+}
+
+\def\PRSUBskip{
+	\medskip
+}
+
+
+\def\pr{\beforPRskip\noindent\stepcounter{problem}{\bf \theproblem .\;}\setcounter{subproblem}{0}}
+\def\pru{\beforPRskip\noindent\stepcounter{problem}{\bf $\mathbf{\theproblem}^\circ$\!\!.\;}\setcounter{subproblem}{0}}
+\def\prstar{\beforPRskip\noindent\stepcounter{problem}{\bf $\mathbf{\theproblem}^*$\negthickspace.}\setcounter{subproblem}{0}\;}
+\def\prpfrom[#1]{\beforPRskip\noindent\stepcounter{problem}{\bf Задача \theproblem~(№#1 из задания).  }\setcounter{subproblem}{0} }
+\def\prp{\beforPRskip\noindent\stepcounter{problem}{\bf Задача \theproblem .  }\setcounter{subproblem}{0} }
+
+\def\prpvar{\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{1}{\bf Задача \theproblem \;$\langle${\rm\Rnum{\theprvar}}$\rangle$.}\setcounter{subproblem}{0}\;}
+\def\prpv{\beforPRskip\noindent\stepcounter{prvar}{\bf Задача \theproblem \,$\bm\langle$\bracketspace{{\rm\Rnum{\theprvar}}}$\bm\rangle$.  }\setcounter{subproblem}{0} }
+\def\prv{\beforPRskip\noindent\stepcounter{prvar}{\bf \theproblem\,$\bm\langle$\bracketspace{{\rm\Rnum{\theprvar}}}$\bm\rangle$}.\setcounter{subproblem}{0} }
+
+\def\prpstar{\beforPRskip\noindent\stepcounter{problem}{\bf Задача $\bf\theproblem^*$\negthickspace.  }\setcounter{subproblem}{0} }
+\def\prdag{\beforPRskip\noindent\stepcounter{problem}{\bf Задача $\theproblem^{^\dagger}$\negthickspace\,.  }\setcounter{subproblem}{0} }
+\def\upr{\beforPRskip\noindent\stepcounter{uproblem}{\bf Упражнение \theuproblem .  }\setcounter{subproblem}{0} }
+%\def\prp{\vspace{5pt}\stepcounter{problem}{\bf Задача \theproblem .  } }
+%\def\prs{\vspace{5pt}\stepcounter{problem}{\bf \theproblem .*   }
+\def\prsub{\PRSUBskip\noindent\stepcounter{subproblem}{\sf \thesubproblem .} }
+\def\prsubr{\PRSUBskip\noindent\stepcounter{subproblem}{\bf \asbuk{subproblem})}\;}
+\def\prsubstar{\PRSUBskip\noindent\stepcounter{subproblem}{\rm $\thesubproblem^*$\negthickspace.  } }
+\def\prsubrstar{\PRSUBskip\noindent\stepcounter{subproblem}{$\text{\bf \asbuk{subproblem}}^*\mathbf{)}$}\;}
+
+\newcommand{\bracketspace}[1]{\phantom{(}\!\!{#1}\!\!\phantom{)}}
+
+\DeclareDocumentCommand{\Prpvar}{ O{null} O{} }{
+	\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{1}{\bf Задача \theproblem
+% 	\ifthenelse{\equal{#1}{null}}{  }{ {\sf $\bm\langle$\bracketspace{#1}$\bm\rangle$}}
+%	~\!\!(\bracketspace{{\rm\Rnum{\theprvar}}}).  }\setcounter{subproblem}{0}
+%	\;(\bracketspace{{\rm\Rnum{\theprvar}}})}\setcounter{subproblem}{0}
+%
+	\,{\sf $\bm\langle$\bracketspace{{\rm\Rnum{\theprvar}}}$\bm\rangle$}
+	~\!\!\! \ifthenelse{\equal{#1}{null}}{\!}{{\sf(\bracketspace{#1})}}}.
+
+}
+%\DeclareDocumentCommand{\Prpvar}{ O{level} O{meta} m }{\prpvar}
+
+
+\DeclareDocumentCommand{\Prp}{ O{null} O{null} }{\setcounter{subproblem}{0}
+	\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{0}{\bf Задача \theproblem
+	~\!\!\! \ifthenelse{\equal{#1}{null}}{\!}{{\sf(\bracketspace{#1})}}
+	 \ifthenelse{\equal{#2}{null}}{\!\!}{{\sf [\color{Gray444}\,\bracketspace{{\fontfamily{afd}\selectfont#2}}\,]}}}.}
+
+\DeclareDocumentCommand{\Pr}{ O{null} O{null} }{\setcounter{subproblem}{0}
+	\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{0}{\bf\theproblem
+	~\!\!\! \ifthenelse{\equal{#1}{null}}{\!\!}{{\sf(\bracketspace{#1})}}
+	 \ifthenelse{\equal{#2}{null}}{\!\!}{{\sf [\color{Gray444}\,\bracketspace{{\fontfamily{afd}\selectfont#2}}\,]}}}.}
+
+%\DeclareDocumentCommand{\Prp}{ O{level} O{meta} }
+
+\DeclareDocumentCommand{\Prps}{ O{null} O{null} }{\setcounter{subproblem}{0}
+	\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{0}{\bf Задача $\bm\theproblem^* $
+	~\!\!\! \ifthenelse{\equal{#1}{null}}{\!}{{\sf(\bracketspace{#1})}}
+	 \ifthenelse{\equal{#2}{null}}{\!\!}{{\sf [\color{Gray444}\,\bracketspace{{\fontfamily{afd}\selectfont#2}}\,]}}}.
+}
+
+\DeclareDocumentCommand{\Prpd}{ O{null} O{null} }{\setcounter{subproblem}{0}
+	\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{0}{\bf Задача $\bm\theproblem^\dagger$
+	~\!\!\! \ifthenelse{\equal{#1}{null}}{\!}{{\sf(\bracketspace{#1})}}
+	 \ifthenelse{\equal{#2}{null}}{\!\!}{{\sf [\color{Gray444}\,\bracketspace{{\fontfamily{afd}\selectfont#2}}\,]}}}.
+}
+
+
+\def\prend{
+	\bigskip
+%	\bigskip
+}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% EOF Problems macros  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%\usepackage{erewhon}
+%\usepackage{heuristica}
+%\usepackage{gentium}
+
+\usepackage[portrait, top=3cm, bottom=1.5cm, left=3cm, right=2cm]{geometry}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\lhead{\fontfamily{fca}\selectfont {Алгоритмы. Пономаренко Алексей.} }
+%\lhead{ \bf  {ТРЯП. } Семинар 1 }
+%\chead{\fontfamily{fca}\selectfont {Вариант 1}}
+\rhead{\fontfamily{fca}\selectfont Домашнее задание 2}
+%\rhead{\small 01.09.2016}
+\cfoot{}
+
+\usepackage{titlesec}
+\titleformat{\section}[block]{\Large\bfseries\filcenter {\setcounter{problem}{0}}  }{}{1em}{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Обозначения и операции %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+                                                                    
+\newcommand{\divisible}{\mathop{\raisebox{-2pt}{\vdots}}}           
+\let\Om\Omega
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Shen Macroses %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\w}[1]{{\hbox{\texttt{#1}}}}
+
+\newcommand{\comments}[2][Комментарий]{
+\medskip
+	\noindent{\bfseries #1: }{\textsl{#2}}
+%\medskip	
+}
+
+\begin{document}
+
+\Pr \hspace{0.1cm} Рассмотрим каждый из пунктов:
+
+\prsubr Решаем след. ур-ние: $$238*x + 385*y = 133$$
+
+\hspace{4mm} Составим таблицу:
+
+\begin{center}
+\begin{tabular}{||c | c | c ||} 
+ \hline
+ $x$ & $y$ & $238*x + 385*y$ \\ 
+ \hline\hline
+ 0 & 1 & 385 \\ 
+ \hline
+ 1 & 0 & 238 \\
+ \hline
+ -1 & 1 & 147  \\
+ \hline
+ 2 & -1 & 91 \\
+ \hline
+ -3 & 2 & 56 \\
+ \hline
+ 5 & -3 & 35 \\
+ \hline
+ -8 & 5 & 21 \\
+ \hline
+ 13 & -8 & 14 \\
+ \hline
+ -21 & 13 & 7 \\
+ \hline
+\end{tabular}
+\end{center}
+
+\hspace{4mm} Как мы видим, правая часть уравнения ($C = 133$) делится нацело на НОД(238;385) = 7 $\Rightarrow$ можем записать частное решение ур-ния:
+
+\begin{equation*}
+ \begin{cases}
+   x_0 = (133 : 7) * (-21) = -399,
+   \\
+   y_0 = (133 : 7) * 13 = 247
+ \end{cases}
+\end{equation*}
+
+\hspace{4mm} Теперь найдем общее решение. Разделим обе части исходного ур-ния на НОД = 7. Для нахождения общего решения воспользуемся фактом: 
+
+$$ A*x + B*y = C \Rightarrow A*(x - k*B) + B*(y + k*A) = C, \forall k \in \mathbb{Z} $$
+
+\hspace{4mm} Таким образом, общее решение буде иметь вид:
+
+\begin{equation*}
+ \begin{cases}
+   x = x_0 + \frac{B}{НОД(A;B)} * k,
+   \\
+   y = y_0 - \frac{A}{НОД(A;B)} * k
+ \end{cases}
+\end{equation*}
+
+\begin{equation*}
+ \begin{cases}
+   x = -399 + 55 * k,
+   \\
+   y = 247 - 34 * k
+ \end{cases}
+\end{equation*}
+
+\prsubr Решаем след. ур-ние: $$143*x + 121*y = 52$$
+
+\hspace{4mm} Составим таблицу:
+
+\begin{center}
+\begin{tabular}{||c | c | c ||} 
+ \hline
+ $x$ & $y$ & $143*x + 121*y$ \\ 
+ \hline\hline
+ 1 & 0 & 143 \\ 
+ \hline
+ 0 & 1 & 121 \\
+ \hline
+ 1 & -1 & 22  \\
+ \hline
+ -5 & 6 & 11 \\
+ \hline
+\end{tabular}
+\end{center}
+
+\hspace{4mm} Как мы видим, правая часть уравнения ($C = 52$) не делится нацело на НОД(143;121) = 11 $\Rightarrow$ это ур-ние не имеет целых решений.
+
+\Pr \hspace{1mm} Мы решаем сравнение $$68*x + 85 \equiv 0 (mod \hspace{1mm} 561)$$
+
+\hspace{4mm} Это сравнение эквивалентно след. уравнению: $$68*x + 561*y = 85$$
+
+\hspace{4mm} Составим таблицу:
+
+\begin{center}
+\begin{tabular}{||c | c | c ||} 
+ \hline
+ $x$ & $y$ & $68*x + 561*y$ \\ 
+ \hline\hline
+ 0 & 1 & 561 \\ 
+ \hline
+ 1 & 0 & 68 \\
+ \hline
+ -8 & 1 & 17  \\
+ \hline
+\end{tabular}
+\end{center}
+
+\hspace{4mm} По аналогии с прошлым заданием, 
+
+\begin{equation*}
+ \begin{cases}
+   x = -7 + 33 * k,
+   \\
+   y = 1 - 4 * k
+ \end{cases}
+\end{equation*}
+
+\Pr \hspace{1mm} Нам необходимо вычислить $7^{13} \hspace{2mm} mod \hspace{2mm} 167$
+
+\hspace{4mm} $7^1 = 7 \equiv 7 \hspace{2mm} (mod \hspace{2mm} 167)$
+
+\hspace{4mm} $7^3 = (7^1)^2 * 7 = 49 * 7 = 343 \equiv 9 \hspace{2mm} (mod \hspace{2mm} 167)$
+
+\hspace{4mm} $7^6 = (7^3)^2 \equiv 9^2 \hspace{2mm} (mod \hspace{2mm} 167) \equiv 81 \hspace{2mm} (mod \hspace{2mm} 167)$
+
+\hspace{4mm} $7^{13} = (7^6)^2 * 7 \equiv 81^2 * 7 \hspace{2mm} (mod \hspace{2mm} 167) \equiv 2 \hspace{2mm} (mod \hspace{2mm} 167)$
+
+\medskip
+
+\hspace{4mm} Таким образом, используя алгоритм быстрого возведения в степень, мы получили, что $7^{13} \equiv 2 \hspace{2mm} (mod \hspace{2mm} 167)$
+
+\Pr \hspace{1mm} Пройдемся по пункам задачи отдельно:
+
+\prsub \textbf{а)} Для начала покажем, что рекурсия остановится. На кадом шаге рекурсии вызывается эта же ф-я от аргумента $\lfloor \frac{x}{2} \rfloor$. Эта операция каждый раз отбрасывает младший бит (так работает округление вниз) $\Rightarrow$ рано или поздно будет вызвана ф-я от аргумента $x = 1$, а значит при следующем вызове будет $x = 0$, и рекурсия остановится.  
+
+\textbf{б)} Теперь покажем, что наш алгоритм приведет нас к верному результату. Воспользуемся ММИ. Пусть ф-я от аргументов $(\lfloor \frac{x}{2} \rfloor ; y)$ возвращает верный результат. Тогда, рассмотрим 2 ситуации: x в данном локальном пространстве четно или нечетно. Если оно четно, то достаточно возвращаемые $(q;r)$ просто домножить на 2 и посмотреть на число $2*r$: взять его по модулю y (конечно же не забывая увеличить счетчик $q$ в случае, если $2*r \geq y$). Если оно нечетно, то в целом все действия будут проделаны так же, за исключением того что нужно будет к числу $2*r$ еще прибавить единицу, потому что при делении с округлением вниз эта единица "пропадает". Таким образом, наша функция вернет верный результат, а именно в качестве $q = 2*q' + 2*r' \hspace{2mm} mod \hspace{2mm} y$, а в качестве $r = 2*r' \hspace{2mm} mod \hspace{2mm} y$. И таким способом получим разложение $x = q*y + r$, что и будет верным ответом на задачу.
+
+\prsub Теперь оценим время работы $T(n)$ алгоритма. Имеет смысл рассматривать бинарную модель, так как мы работаем с числом в двоичном представлении (на каждом шаге отбрасываем младший бит). Время работы данного алгоритма имеет квадратичную ассимптотику, и вот, почему. Глубина рекусии в данном случае это $n = \log x$, и она равна длине входа. Так как мы рассматриваем бинарную модель, каждая операция при каждом вызове имеет время работы $O(n)$. Таким образом, $T(n) = O(n^2)$ (n - кол-во шагов и на каждом шаге сложность каждой операции $O(n)$).
+
+\Pr \hspace{1mm} Рассмотрим каждый пункт задачи отдельно:
+
+\prsub Мы рассматриваем ф-ю $T_1(n) = T_1(n-1) + cn (n>3)$. Выразим $N_1(n)$ через младшие ф-ии. $$T_1(n) = T_1(n-1) + cn = T_1(n-2) + c(n-1) + cn = T_1(n-3) + c(n-2) + c(n-1) + cn = ... = $$
+$$ = T_1(n-k) + kcn - \frac{k*(k-1)}{2} c$$
+
+Мы будем проделывать такое до тех пор, пока $k < n-3$. Как только $k = n-3$ получится, что $T_1(n) = O(n^2)$. Это мы, по сути, получили оценку на саму ф-ю $T_1(n)$. Если честно, я не до конца понял, что именно нужно посчитать, поэтому еще сделаю, что подумал немного более точно подойдет под формулировку задачи. А именно, рассмотрел асимптотику роста ф-ии, то есть $\frac{T_1(n) - T_1(n-1)}{n - (n-1)} = cn = O(n).$ Но это кажется слишком очевидеым и простым, поэтому я провел рассуждения выше.
+
+\prsub Для доказательсва данного утверждения воспользуемся ММИ. Пусть верна оценка $\forall k < n$. Тогда, получаем: $$T_2(n) = T_2(n-1) + 4*T_2(n-3) \leq c_1*2^{n-1} + c_1*2^2*2^{n-3} = c_1*2^{n-1} = O(2^n)$$ $$T_2(n) = T_2(n-1) + 4*T_2(n-3) \geq c_2*2^{n-1} + c_2*2^2*2^{n-3} = c_2*2^{n-1} = \Omega(2^n)$$
+
+Таким образом, $\log T_2(n) = \Theta (n)$. 
+
+\end{document}

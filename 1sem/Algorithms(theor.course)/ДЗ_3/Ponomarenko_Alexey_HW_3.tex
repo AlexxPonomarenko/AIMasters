@@ -1,0 +1,271 @@
+\documentclass[12pt]{extreport}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}        % Кодировка входного документа;
+                                    % при необходимости, вместо cp1251
+                                    % можно указать cp866 (Alt-кодировка
+                                    % DOS) или koi8-r.
+
+\usepackage[english,russian]{babel} % Включение русификации, русских и
+                                    % английских стилей и переносов
+%%\usepackage{a4}
+%%\usepackage{moreverb}
+\usepackage{amsmath,amsfonts,amsthm,amssymb,amsbsy,amstext,amscd,amsxtra,multicol}
+\usepackage{indentfirst}
+\usepackage{verbatim}
+\usepackage{tikz} %Рисование автоматов
+\usetikzlibrary{automata,positioning}
+\usepackage{multicol} %Несколько колонок
+\usepackage{graphicx}
+\usepackage[colorlinks,urlcolor=blue]{hyperref}
+\usepackage[stable]{footmisc}
+
+%% \voffset-5mm
+%% \def\baselinestretch{1.44}
+\renewcommand{\theequation}{\arabic{equation}}
+\def\hm#1{#1\nobreak\discretionary{}{\hbox{$#1$}}{}}
+\newtheorem{Lemma}{Лемма}
+\newtheorem{Remark}{Замечание}
+%%\newtheorem{Def}{Определение}
+\newtheorem{Claim}{Утверждение}
+\newtheorem{Cor}{Следствие}
+\newtheorem{Theorem}{Теорема}
+\theoremstyle{definition}
+\newtheorem{Example}{Пример}
+\newtheorem*{known}{Теорема}
+\def\proofname{Доказательство}
+\theoremstyle{definition}
+\newtheorem{Def}{Определение}
+
+%% \newenvironment{Example} % имя окружения
+%% {\par\noindent{\bf Пример.}} % команды для \begin
+%% {\hfill$\scriptstyle\qed$} % команды для \end
+
+
+
+
+
+
+%\date{22 июня 2011 г.}
+\let\leq\leqslant
+\let\geq\geqslant
+\def\MT{\mathrm{MT}}
+%Обозначения ``ажуром''
+\def\BB{\mathbb B}
+\def\CC{\mathbb C}
+\def\RR{\mathbb R}
+\def\SS{\mathbb S}
+\def\ZZ{\mathbb Z}
+\def\NN{\mathbb N}
+\def\FF{\mathbb F}
+%греческие буквы
+\let\epsilon\varepsilon
+\let\es\varnothing
+\let\eps\varepsilon
+\let\al\alpha
+\let\sg\sigma
+\let\ga\gamma
+\let\ph\varphi
+\let\om\omega
+\let\ld\lambda
+\let\Ld\Lambda
+\let\vk\varkappa
+\let\Om\Omega
+\def\abstractname{}
+
+\def\R{{\cal R}}
+\def\A{{\cal A}}
+\def\B{{\cal B}}
+\def\C{{\cal C}}
+\def\D{{\cal D}}
+
+%классы сложности
+\def\REG{{\mathsf{REG}}}
+\def\CFL{{\mathsf{CFL}}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Problems macros  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%% Enumerations %%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Rnum}[1]{\expandafter{\romannumeral #1\relax}}
+\newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+%%%%%%%%%%%%%%%%%%%%% EOF Enumerations %%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{xparse}
+\usepackage{ifthen}
+\usepackage{bm} %%% bf in math mode
+\usepackage{color}
+%\usepackage[usenames,dvipsnames]{xcolor}
+
+\definecolor{Gray555}{HTML}{555555}
+\definecolor{Gray444}{HTML}{444444}
+\definecolor{Gray333}{HTML}{333333}
+
+
+\newcounter{problem}
+\newcounter{uproblem}
+\newcounter{subproblem}
+\newcounter{prvar}
+
+\def\beforPRskip{
+	\bigskip
+	%\vspace*{2ex}
+}
+
+\def\PRSUBskip{
+	\medskip
+}
+
+
+\def\pr{\beforPRskip\noindent\stepcounter{problem}{\bf \theproblem .\;}\setcounter{subproblem}{0}}
+\def\pru{\beforPRskip\noindent\stepcounter{problem}{\bf $\mathbf{\theproblem}^\circ$\!\!.\;}\setcounter{subproblem}{0}}
+\def\prstar{\beforPRskip\noindent\stepcounter{problem}{\bf $\mathbf{\theproblem}^*$\negthickspace.}\setcounter{subproblem}{0}\;}
+\def\prpfrom[#1]{\beforPRskip\noindent\stepcounter{problem}{\bf Задача \theproblem~(№#1 из задания).  }\setcounter{subproblem}{0} }
+\def\prp{\beforPRskip\noindent\stepcounter{problem}{\bf Задача \theproblem .  }\setcounter{subproblem}{0} }
+
+\def\prpvar{\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{1}{\bf Задача \theproblem \;$\langle${\rm\Rnum{\theprvar}}$\rangle$.}\setcounter{subproblem}{0}\;}
+\def\prpv{\beforPRskip\noindent\stepcounter{prvar}{\bf Задача \theproblem \,$\bm\langle$\bracketspace{{\rm\Rnum{\theprvar}}}$\bm\rangle$.  }\setcounter{subproblem}{0} }
+\def\prv{\beforPRskip\noindent\stepcounter{prvar}{\bf \theproblem\,$\bm\langle$\bracketspace{{\rm\Rnum{\theprvar}}}$\bm\rangle$}.\setcounter{subproblem}{0} }
+
+\def\prpstar{\beforPRskip\noindent\stepcounter{problem}{\bf Задача $\bf\theproblem^*$\negthickspace.  }\setcounter{subproblem}{0} }
+\def\prdag{\beforPRskip\noindent\stepcounter{problem}{\bf Задача $\theproblem^{^\dagger}$\negthickspace\,.  }\setcounter{subproblem}{0} }
+\def\upr{\beforPRskip\noindent\stepcounter{uproblem}{\bf Упражнение \theuproblem .  }\setcounter{subproblem}{0} }
+%\def\prp{\vspace{5pt}\stepcounter{problem}{\bf Задача \theproblem .  } }
+%\def\prs{\vspace{5pt}\stepcounter{problem}{\bf \theproblem .*   }
+\def\prsub{\PRSUBskip\noindent\stepcounter{subproblem}{\sf \thesubproblem .} }
+\def\prsubr{\PRSUBskip\noindent\stepcounter{subproblem}{\bf \asbuk{subproblem})}\;}
+\def\prsubstar{\PRSUBskip\noindent\stepcounter{subproblem}{\rm $\thesubproblem^*$\negthickspace.  } }
+\def\prsubrstar{\PRSUBskip\noindent\stepcounter{subproblem}{$\text{\bf \asbuk{subproblem}}^*\mathbf{)}$}\;}
+
+\newcommand{\bracketspace}[1]{\phantom{(}\!\!{#1}\!\!\phantom{)}}
+
+\DeclareDocumentCommand{\Prpvar}{ O{null} O{} }{
+	\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{1}{\bf Задача \theproblem
+% 	\ifthenelse{\equal{#1}{null}}{  }{ {\sf $\bm\langle$\bracketspace{#1}$\bm\rangle$}}
+%	~\!\!(\bracketspace{{\rm\Rnum{\theprvar}}}).  }\setcounter{subproblem}{0}
+%	\;(\bracketspace{{\rm\Rnum{\theprvar}}})}\setcounter{subproblem}{0}
+%
+	\,{\sf $\bm\langle$\bracketspace{{\rm\Rnum{\theprvar}}}$\bm\rangle$}
+	~\!\!\! \ifthenelse{\equal{#1}{null}}{\!}{{\sf(\bracketspace{#1})}}}.
+
+}
+%\DeclareDocumentCommand{\Prpvar}{ O{level} O{meta} m }{\prpvar}
+
+
+\DeclareDocumentCommand{\Prp}{ O{null} O{null} }{\setcounter{subproblem}{0}
+	\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{0}{\bf Задача \theproblem
+	~\!\!\! \ifthenelse{\equal{#1}{null}}{\!}{{\sf(\bracketspace{#1})}}
+	 \ifthenelse{\equal{#2}{null}}{\!\!}{{\sf [\color{Gray444}\,\bracketspace{{\fontfamily{afd}\selectfont#2}}\,]}}}.}
+
+\DeclareDocumentCommand{\Pr}{ O{null} O{null} }{\setcounter{subproblem}{0}
+	\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{0}{\bf\theproblem
+	~\!\!\! \ifthenelse{\equal{#1}{null}}{\!\!}{{\sf(\bracketspace{#1})}}
+	 \ifthenelse{\equal{#2}{null}}{\!\!}{{\sf [\color{Gray444}\,\bracketspace{{\fontfamily{afd}\selectfont#2}}\,]}}}.}
+
+%\DeclareDocumentCommand{\Prp}{ O{level} O{meta} }
+
+\DeclareDocumentCommand{\Prps}{ O{null} O{null} }{\setcounter{subproblem}{0}
+	\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{0}{\bf Задача $\bm\theproblem^* $
+	~\!\!\! \ifthenelse{\equal{#1}{null}}{\!}{{\sf(\bracketspace{#1})}}
+	 \ifthenelse{\equal{#2}{null}}{\!\!}{{\sf [\color{Gray444}\,\bracketspace{{\fontfamily{afd}\selectfont#2}}\,]}}}.
+}
+
+\DeclareDocumentCommand{\Prpd}{ O{null} O{null} }{\setcounter{subproblem}{0}
+	\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{0}{\bf Задача $\bm\theproblem^\dagger$
+	~\!\!\! \ifthenelse{\equal{#1}{null}}{\!}{{\sf(\bracketspace{#1})}}
+	 \ifthenelse{\equal{#2}{null}}{\!\!}{{\sf [\color{Gray444}\,\bracketspace{{\fontfamily{afd}\selectfont#2}}\,]}}}.
+}
+
+
+\def\prend{
+	\bigskip
+%	\bigskip
+}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% EOF Problems macros  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%\usepackage{erewhon}
+%\usepackage{heuristica}
+%\usepackage{gentium}
+
+\usepackage[portrait, top=3cm, bottom=1.5cm, left=3cm, right=2cm]{geometry}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\lhead{\fontfamily{fca}\selectfont {Алгоритмы. Пономаренко Алексей.} }
+%\lhead{ \bf  {ТРЯП. } Семинар 1 }
+%\chead{\fontfamily{fca}\selectfont {Вариант 1}}
+\rhead{\fontfamily{fca}\selectfont Домашнее задание 3}
+%\rhead{\small 01.09.2016}
+\cfoot{}
+
+\usepackage{titlesec}
+\titleformat{\section}[block]{\Large\bfseries\filcenter {\setcounter{problem}{0}}  }{}{1em}{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Обозначения и операции %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+                                                                    
+\newcommand{\divisible}{\mathop{\raisebox{-2pt}{\vdots}}}           
+\let\Om\Omega
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Shen Macroses %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\w}[1]{{\hbox{\texttt{#1}}}}
+
+\newcommand{\comments}[2][Комментарий]{
+\medskip
+	\noindent{\bfseries #1: }{\textsl{#2}}
+%\medskip	
+}
+
+\begin{document}
+
+\Pr \hspace{0.1cm} Случай, когда $n < 2023$ никак не влияет на асимптотику, т.к. это $O(1)$ операций.
+
+$$T(n) = 3 * T(\lfloor \frac{n}{4} \rfloor) + O(1) \Rightarrow d = 0,1 < \log_4(3) = \log_b(a) \Rightarrow$$
+
+\centering $\Rightarrow$ по мастер-теореме $T(n) = \Theta(n^{\log_4(3)})$
+
+\raggedright
+
+\Pr \hspace{1mm} Рассмотрим каждый пункт:
+
+\prsubr $T(n) = 36 * T(\lfloor \frac{n}{6} \rfloor) + n^2 = 36 * T(\lfloor \frac{n}{6} \rfloor) + O(n^2) \Rightarrow d = 2 == \log_6(36) = \log_b(a) \Rightarrow$ \smallskip по мастер-теореме $T(n) = \Theta(n^2 * \log_2(n))$  
+
+\prsubr $T(n) = 3 * T(\lfloor \frac{n}{3} \rfloor) + n^2 = 3 * T(\lfloor \frac{n}{3} \rfloor) + O(n^2) \Rightarrow d = 2 > \log_3(3) = \log_b(a) \Rightarrow$ \smallskip по мастер-теореме $T(n) = \Theta(n^2)$ 
+
+\prsubr $T(n) = 4 * T(\lfloor \frac{n}{2} \rfloor) + \lfloor \frac{n}{\log_2(n)} \rfloor = 4 * T(\lfloor \frac{n}{2} \rfloor) + O(n) \Rightarrow d = 1 < \log_2(4) = \log_b(a) \Rightarrow$ \smallskip по мастер-теореме $T(n) = \Theta(n^2)$ 
+
+\Pr \hspace{1mm} $T(n) = n * T(\lceil \frac{n}{2} \rceil) + \Theta(n) = n * T(\lceil \frac{n}{2} \rceil) + C*n = \sum_{k=0}^{h-1} C*n^k*\frac{n}{2^k} + d*n^h = C*n*\sum_{k=0}^{h-1} (\frac{n}{2})^k + d * n^{\log_2(n)}$
+
+\medskip
+
+Рассмотрим $\sum_{k=0}^{h-1} (\frac{n}{2})^k = \frac{(\frac{n}{2})^h-1}{\frac{n}{2}-1} = \Theta(n^{\log_2(n)})$
+
+\medskip
+
+Таким образом, $T(n) = \Theta(n^{\log_2(n)})$
+
+\Pr \hspace{1mm} Не успеваю затехать((((
+
+\Pr \hspace{1mm} Не успеваю затехать((((
+
+\Pr \hspace{1mm} Данная задача красиво решается рекурсивно: (пусть у нас b - всегда меньшее число для удобства записи) $ a*b = b^2 + (a-b)*b $. В таком случае для того, чтобы посчитать произведение a на b, мы должны поситать (a-b) на b (вызываем рекурсию). Тогда, сложность совершенно очевидно доказывается через ММИ (пусть ф-я линейна - для n = 1 верно; тогда если известно для (n-1)-ого шага, то $a*b = b^2 + (a-b)*b = O(n) + O(n)$ (по предположению индукции), а значит $a*b$ - линейно. Корректность также доказывается несложно: рекурсия точно остановится, т.к. на каждом шаге рекурсии мы уменьшаем больший множитель на меньший, и он может стать либо меньше меньшего, либо равным ему. ВО втором случае один из множителей становится равным нулю, и рекурсия останавливается, а в первом она равно или поздно придет ко второму. Также наш алгоритм выдаст именно тот, нужный нам результат, потому что мы банально разложили число a на сумму $b + (a-b)$.
+
+\Pr \hspace{1mm} Рассмотрим каждый пункт: 
+
+\prsubr По аналогии с алгоритмом на семинаре строим дерево рекурсии, и видим, что на каждом шаге получается $C*n$ операций, а тогда мы можем так ограничить $T(n)$: $T_{h_1}(n) \leq T(n) \leq T_{h_2}(n)$. Также нам известно, что $T_{h_1}(n) = \Theta(n * \log_2(n)) \Rightarrow T(n) = \Theta(n * \log_2(n))$
+
+\prsubr Данный пункт абсолютно аналогичен по алгоритму нахождения ответа. Ответ в данном пунке точно такой же, как и в пункте а).
+
+\prsubr $T(n) = 27 * T(\frac{n}{3}) + \frac{n^3}{(\log_2(n))^2} = \sum_{k=0}^{h-1} 27^k * \frac{(\frac{n}{3^k})^3}{(\log_2(\frac{n}{3^k}))^2} = n^3 * (log_3(2))^2 * (\frac{1}{(\log_3(n))^2} + ... + \frac{1}{(\log_3(\frac{n}{3^{h-1}}))^2}) = n^3 * (log_3(2))^2 * \sum_{k=0}^{h-1} \frac{1}{k^2} < n^3 * (log_3(2))^2 * \pi = \Theta(n^3)$
+
+\end{document}

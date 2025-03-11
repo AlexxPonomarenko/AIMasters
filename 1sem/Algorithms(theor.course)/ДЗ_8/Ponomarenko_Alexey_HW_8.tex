@@ -1,0 +1,282 @@
+\documentclass[12pt]{extreport}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}        % Кодировка входного документа;
+                                    % при необходимости, вместо cp1251
+                                    % можно указать cp866 (Alt-кодировка
+                                    % DOS) или koi8-r.
+
+\usepackage[english,russian]{babel} % Включение русификации, русских и
+                                    % английских стилей и переносов
+%%\usepackage{a4}
+%%\usepackage{moreverb}
+\usepackage{amsmath,amsfonts,amsthm,amssymb,amsbsy,amstext,amscd,amsxtra,multicol}
+\usepackage{indentfirst}
+\usepackage{verbatim}
+\usepackage{tikz} %Рисование автоматов
+\usetikzlibrary{automata,positioning}
+\usepackage{multicol} %Несколько колонок
+\usepackage{graphicx}
+\usepackage[colorlinks,urlcolor=blue]{hyperref}
+\usepackage[stable]{footmisc}
+
+%% \voffset-5mm
+%% \def\baselinestretch{1.44}
+\renewcommand{\theequation}{\arabic{equation}}
+\def\hm#1{#1\nobreak\discretionary{}{\hbox{$#1$}}{}}
+\newtheorem{Lemma}{Лемма}
+\newtheorem{Remark}{Замечание}
+%%\newtheorem{Def}{Определение}
+\newtheorem{Claim}{Утверждение}
+\newtheorem{Cor}{Следствие}
+\newtheorem{Theorem}{Теорема}
+\theoremstyle{definition}
+\newtheorem{Example}{Пример}
+\newtheorem*{known}{Теорема}
+\def\proofname{Доказательство}
+\theoremstyle{definition}
+\newtheorem{Def}{Определение}
+
+%% \newenvironment{Example} % имя окружения
+%% {\par\noindent{\bf Пример.}} % команды для \begin
+%% {\hfill$\scriptstyle\qed$} % команды для \end
+
+
+
+
+
+
+%\date{22 июня 2011 г.}
+\let\leq\leqslant
+\let\geq\geqslant
+\def\MT{\mathrm{MT}}
+%Обозначения ``ажуром''
+\def\BB{\mathbb B}
+\def\CC{\mathbb C}
+\def\RR{\mathbb R}
+\def\SS{\mathbb S}
+\def\ZZ{\mathbb Z}
+\def\NN{\mathbb N}
+\def\FF{\mathbb F}
+%греческие буквы
+\let\epsilon\varepsilon
+\let\es\varnothing
+\let\eps\varepsilon
+\let\al\alpha
+\let\sg\sigma
+\let\ga\gamma
+\let\ph\varphi
+\let\om\omega
+\let\ld\lambda
+\let\Ld\Lambda
+\let\vk\varkappa
+\let\Om\Omega
+\def\abstractname{}
+
+\def\R{{\cal R}}
+\def\A{{\cal A}}
+\def\B{{\cal B}}
+\def\C{{\cal C}}
+\def\D{{\cal D}}
+
+%классы сложности
+\def\REG{{\mathsf{REG}}}
+\def\CFL{{\mathsf{CFL}}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Problems macros  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%% Enumerations %%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Rnum}[1]{\expandafter{\romannumeral #1\relax}}
+\newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+%%%%%%%%%%%%%%%%%%%%% EOF Enumerations %%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{xparse}
+\usepackage{ifthen}
+\usepackage{bm} %%% bf in math mode
+\usepackage{color}
+%\usepackage[usenames,dvipsnames]{xcolor}
+
+\definecolor{Gray555}{HTML}{555555}
+\definecolor{Gray444}{HTML}{444444}
+\definecolor{Gray333}{HTML}{333333}
+
+
+\newcounter{problem}
+\newcounter{uproblem}
+\newcounter{subproblem}
+\newcounter{prvar}
+
+\def\beforPRskip{
+	\bigskip
+	%\vspace*{2ex}
+}
+
+\def\PRSUBskip{
+	\medskip
+}
+
+
+\def\pr{\beforPRskip\noindent\stepcounter{problem}{\bf \theproblem .\;}\setcounter{subproblem}{0}}
+\def\pru{\beforPRskip\noindent\stepcounter{problem}{\bf $\mathbf{\theproblem}^\circ$\!\!.\;}\setcounter{subproblem}{0}}
+\def\prstar{\beforPRskip\noindent\stepcounter{problem}{\bf $\mathbf{\theproblem}^*$\negthickspace.}\setcounter{subproblem}{0}\;}
+\def\prpfrom[#1]{\beforPRskip\noindent\stepcounter{problem}{\bf Задача \theproblem~(№#1 из задания).  }\setcounter{subproblem}{0} }
+\def\prp{\beforPRskip\noindent\stepcounter{problem}{\bf Задача \theproblem .  }\setcounter{subproblem}{0} }
+
+\def\prpvar{\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{1}{\bf Задача \theproblem \;$\langle${\rm\Rnum{\theprvar}}$\rangle$.}\setcounter{subproblem}{0}\;}
+\def\prpv{\beforPRskip\noindent\stepcounter{prvar}{\bf Задача \theproblem \,$\bm\langle$\bracketspace{{\rm\Rnum{\theprvar}}}$\bm\rangle$.  }\setcounter{subproblem}{0} }
+\def\prv{\beforPRskip\noindent\stepcounter{prvar}{\bf \theproblem\,$\bm\langle$\bracketspace{{\rm\Rnum{\theprvar}}}$\bm\rangle$}.\setcounter{subproblem}{0} }
+
+\def\prpstar{\beforPRskip\noindent\stepcounter{problem}{\bf Задача $\bf\theproblem^*$\negthickspace.  }\setcounter{subproblem}{0} }
+\def\prdag{\beforPRskip\noindent\stepcounter{problem}{\bf Задача $\theproblem^{^\dagger}$\negthickspace\,.  }\setcounter{subproblem}{0} }
+\def\upr{\beforPRskip\noindent\stepcounter{uproblem}{\bf Упражнение \theuproblem .  }\setcounter{subproblem}{0} }
+%\def\prp{\vspace{5pt}\stepcounter{problem}{\bf Задача \theproblem .  } }
+%\def\prs{\vspace{5pt}\stepcounter{problem}{\bf \theproblem .*   }
+\def\prsub{\PRSUBskip\noindent\stepcounter{subproblem}{\sf \thesubproblem .} }
+\def\prsubr{\PRSUBskip\noindent\stepcounter{subproblem}{\bf \asbuk{subproblem})}\;}
+\def\prsubstar{\PRSUBskip\noindent\stepcounter{subproblem}{\rm $\thesubproblem^*$\negthickspace.  } }
+\def\prsubrstar{\PRSUBskip\noindent\stepcounter{subproblem}{$\text{\bf \asbuk{subproblem}}^*\mathbf{)}$}\;}
+
+\newcommand{\bracketspace}[1]{\phantom{(}\!\!{#1}\!\!\phantom{)}}
+
+\DeclareDocumentCommand{\Prpvar}{ O{null} O{} }{
+	\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{1}{\bf Задача \theproblem
+% 	\ifthenelse{\equal{#1}{null}}{  }{ {\sf $\bm\langle$\bracketspace{#1}$\bm\rangle$}}
+%	~\!\!(\bracketspace{{\rm\Rnum{\theprvar}}}).  }\setcounter{subproblem}{0}
+%	\;(\bracketspace{{\rm\Rnum{\theprvar}}})}\setcounter{subproblem}{0}
+%
+	\,{\sf $\bm\langle$\bracketspace{{\rm\Rnum{\theprvar}}}$\bm\rangle$}
+	~\!\!\! \ifthenelse{\equal{#1}{null}}{\!}{{\sf(\bracketspace{#1})}}}.
+
+}
+%\DeclareDocumentCommand{\Prpvar}{ O{level} O{meta} m }{\prpvar}
+
+
+\DeclareDocumentCommand{\Prp}{ O{null} O{null} }{\setcounter{subproblem}{0}
+	\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{0}{\bf Задача \theproblem
+	~\!\!\! \ifthenelse{\equal{#1}{null}}{\!}{{\sf(\bracketspace{#1})}}
+	 \ifthenelse{\equal{#2}{null}}{\!\!}{{\sf [\color{Gray444}\,\bracketspace{{\fontfamily{afd}\selectfont#2}}\,]}}}.}
+
+\DeclareDocumentCommand{\Pr}{ O{null} O{null} }{\setcounter{subproblem}{0}
+	\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{0}{\bf\theproblem
+	~\!\!\! \ifthenelse{\equal{#1}{null}}{\!\!}{{\sf(\bracketspace{#1})}}
+	 \ifthenelse{\equal{#2}{null}}{\!\!}{{\sf [\color{Gray444}\,\bracketspace{{\fontfamily{afd}\selectfont#2}}\,]}}}.}
+
+%\DeclareDocumentCommand{\Prp}{ O{level} O{meta} }
+
+\DeclareDocumentCommand{\Prps}{ O{null} O{null} }{\setcounter{subproblem}{0}
+	\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{0}{\bf Задача $\bm\theproblem^* $
+	~\!\!\! \ifthenelse{\equal{#1}{null}}{\!}{{\sf(\bracketspace{#1})}}
+	 \ifthenelse{\equal{#2}{null}}{\!\!}{{\sf [\color{Gray444}\,\bracketspace{{\fontfamily{afd}\selectfont#2}}\,]}}}.
+}
+
+\DeclareDocumentCommand{\Prpd}{ O{null} O{null} }{\setcounter{subproblem}{0}
+	\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{0}{\bf Задача $\bm\theproblem^\dagger$
+	~\!\!\! \ifthenelse{\equal{#1}{null}}{\!}{{\sf(\bracketspace{#1})}}
+	 \ifthenelse{\equal{#2}{null}}{\!\!}{{\sf [\color{Gray444}\,\bracketspace{{\fontfamily{afd}\selectfont#2}}\,]}}}.
+}
+
+
+\def\prend{
+	\bigskip
+%	\bigskip
+}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% EOF Problems macros  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%\usepackage{erewhon}
+%\usepackage{heuristica}
+%\usepackage{gentium}
+
+\usepackage[portrait, top=3cm, bottom=1.5cm, left=3cm, right=2cm]{geometry}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\lhead{\fontfamily{fca}\selectfont {Алгоритмы. Пономаренко Алексей.} }
+%\lhead{ \bf  {ТРЯП. } Семинар 1 }
+%\chead{\fontfamily{fca}\selectfont {Вариант 1}}
+\rhead{\fontfamily{fca}\selectfont Домашнее задание 8}
+%\rhead{\small 01.09.2016}
+\cfoot{}
+
+\usepackage{titlesec}
+\titleformat{\section}[block]{\Large\bfseries\filcenter {\setcounter{problem}{0}}  }{}{1em}{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Обозначения и операции %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+                                                                    
+\newcommand{\divisible}{\mathop{\raisebox{-2pt}{\vdots}}}           
+\let\Om\Omega
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Shen Macroses %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\w}[1]{{\hbox{\texttt{#1}}}}
+
+\newcommand{\comments}[2][Комментарий]{
+\medskip
+	\noindent{\bfseries #1: }{\textsl{#2}}
+%\medskip	
+}
+
+\begin{document}
+
+\Pr \hspace{1mm} Нам требуется проверить достижимость вершины $t$ из вершины $s$. Для этого запустим поиск в глубину из вершины $t$. Таким образом, мы и для ориентированного, и для неориентированного графа пройдем все вершины графа, и в случае успеха поиск в глубину найдет путь простой путь из $t$ в $s$, иначе вернется в исходную вершину и сообщит о недостижимости. Сложность поиска в глубину равна $O(|V|+|E|)$.
+
+\Pr \hspace{1mm} Представим лабиринт в виде неориентированного графа, где каждая комната это вершина графа, а коридоры между ними - ребра графа. Для нахождения выхода из лабиринта нам нужно обойти в худшем случае все вершины графа. Для этого нужно с помощью поиска в глубину пройти все вершины графа и проверять каждую вершину на выход. Для того, чтобы запоминать, посещали ли мы данную комнату ранее, мы кладем в нее монетку, таким способом имитируя массив посещений вершин. То есть алгоритм такой: стартуем в какой-то комнате, кладем монетку перед входом в любой коридор, идем по нему в любую из смежных комнат, посещаем все смежные с ней комнаты (конечно, кроме исходной) (кладя монетку перед всеми коридорами, куда мы пойдем), возвращаемся в исходную, далее по возвращении в исходную посещаем все остальные смежные комнаты. Таким образом мы пройдемся по всем комнатам (то есть точно узнаем есть ли выход или нет), пройдя по всем $m$ коридорам 2 раза (туда и обратно), то есть за $O(m)$ переходов.
+
+\Pr \hspace{1mm} Данная задача состоит из двух частей: 1) доказательство существования простого пути длины $n-1$ в турнире размера  $n$, 2) построение алгоритма нахождения простого пути.
+
+\begin{enumerate}
+\item Проведем доказательство по ММИ. Заметим, что верно для $n = 2, n = 3$. Пусть верно для $n-1$. Проверим для $n$. По предположению индукции сущесвтует простой путь длины $n-2$ в турнире размера $n-1$. Обозначим этот путь как $\{V_1;...;V_{n-1}\}$. Теперь докажем, что всегда найдется участок пути, куда можно будет вставить новую вершину $V_n$. Обозначим за $A$ - массив смежности графа. Рассмотрим 3 случая: 
+
+\prsubr Если $A[n][V_1] == 1$, тогда просто добавляем вершину перед первой вершиной пути.
+
+\prsubr Если $A[n][V_{n-1}] == 0$, тогда просто добавляем вершину после последней вершины пути.
+
+\prsubr Если $A[n][V_1] == 0$ и $A[n][V_{n-1}] == 1$, то докажем что всегда найдется такая пара вершин нашего пути, таких что новую вершину можно вставить между ними. Воспользуемся техникой, похожей на метод противника: будем идти по нашему пути слева направо и не давать вставить новую вершину между существующими вершинами пути. $A[n][V_1] == 0 \Rightarrow A[V_1][n] == 1$, то есть существует прямая дорога без промежуточных пунктов между первой вершиной пути и новой вершиной. Нам надо сделать так, чтобы на было пути изновой вершины в вершину $V_2$, чтобы мы не могли вставить новую вершину между первой и второй. Тогда, мы просто берем и делаем так, чтобы стрелка шла не из новой вершины в $V_2$, а наоборот. И так далее. Тогда, когда мы дойдем до последней пары вершин $\{ V_{n-2}; V_{n-1} \}$ мы сможем вставить новую вершину между ними (так как $A[V_{n-2}][n] == 1, A[n][V_{n-1}] == 1$), иначе мы бы просто смогли бы вставить ее ранее.
+
+\item Алгоритм поиска такого пути следующий: 
+
+\end{enumerate}
+
+\Pr \hspace{1mm} Данная задача эквивалентна нахождению компонент сильной связности в ориентированном графе (так как в ксс - это связный подграф максимального размера, а тогда количество областей будет минимальным). Тогда алгоритм следующий: проходимся в глубину, транспонируем граф, проходимся в глубину еще раз в порядке убывания времени закрытия вершин. Сложность данного алгоритма равна $O(m + n)$. Корректность доказывалась на лекции 8. 
+
+Для второго пункта задачи мы считаем количество ксс, а также формируем для каждой ксс множество других ксс, в которые есть путь из данной. Тогда после формирования всех этих множеств ответ будет формироваться так: (количество всех ксс) * 2 - (суммарная мощность всех множеств). Умножение на 2 взялось из соображений пути туда-обратно из пары ксс.
+
+\Pr \hspace{1mm} В данной задаче я считаю, что вершины графа пронумерованы в порядке движения пути, то есть граф-путь это $\{ V_1 ; V_2 ; ... ; V_n \}$.
+
+Будем рассматривать только граф на $m$ ребрах. Заметим, что если ребро сонаправлено с направлением пути, то оно не влияет на количество ксс. Тогда уберем все пары значений $(i;i+k), k \in \mathcal{N}$. 
+
+Далее сортируем пары чисел по убыванию первой компоненты (первая компонента - начало ребра, вторая - конец). 
+
+Затем проходимся по полученным ребрам следующим образом: если начало текущего ребра меньше, чем конец предыдущего, то увеличиваем количество ксс на 1, иначе удаляем текущее ребро, а первую компоненту предыдущего ребра заменяем на минимум из двух чисел: 1) конец предыдущего ребра, 2) конец текущего ребра.
+
+В конце считаем число одиночных ксс среди оставшихся вершин и добавляем их в счетчик.
+
+Сложность данного алгоритма: $O(m)$ (проход в конце) + $O(m*\log_2(m))$ (сортировка)
+
+\Pr \hspace{1mm} Первым делом докажем, что в обеих долях нашего двудольного графа одинаковое число вершин. 
+
+По условию известно, что степень каждой вершины равна 2, тогда у каждой вершины левой доли есть 2 ребра. Общая сумма ребер, левый конец которых лежит в левой доле, тогда равен $2*n$ (где $n$ - число вершин в левой доле). Тогда, из принципа Дирихле следует, что количество вершин в правой доле также $2*n$ (данное утверждение следует из принципа Дирихле след. образом: если бы вершин в правой доле было бы меньше, чем $n$, то была бы хотя бы 1 вершина, чья степень была бы больше, чем 2, и наоборот, если бы в правой доле было бы больше вершин, то степень хотя бы одной вершины была бы меньше 2, что противоречит условию задачи).
+
+Итак, мы доказали, что количество вершин в обеих долях графа одинаково. В таком случае, рассмотрим левую долю. Из каждой вершины исходит по 2 ребра. Тогда, подмножество ребер графа, имеющих попарно различные концы, будет состоять ровно из $n$ ребер - количество равное половине всех вершин графа, то есть $\frac{|V|}{2}$. 
+
+Далее просто выбираем произвольную веришну из левой доли и идем по любому из рёбер в правую долю. Затем по оставшемуся ребру правой вершины идем в левую долю, и так далее. Таким способом, мы обойдем весь граф в глубину, и он либо будет являться одним большим деревом, либо будет лесом, состоящим из нескольких деревьев (циклов в графе). Мы сможем пройти так весь граф, задействовав все вершины, так как у всех вершин графа степень 2, то есть в случае одного большого дерева все вершины можно просто разместить по кругу и соединить между собой и, начав с любой из них, мы полностью обойдем граф. В случае нескольких деревьев граф можно будет представить в виде нескольких таких "кругов" благодаря тому, что степени всех вершин равны 2.
+
+Итого, сложность такого обхода в глубину равна $O(|V|+|E|)$.
+
+\Pr \hspace{1.5mm} Алгоритм следующий: сначала выполняем топологическую сортировку, а затем делаем обход в глубину, подсчитывая максимальный путь.
+
+Сложность: сортировка - $O(|V|+|E|)$, обход в глубину - $O(|V|+|E|)$. Итого, сложность равна $O(|V|+|E|)$.
+
+Корректность: самый длинный путь в DAG должен начинаться в топологически самой старшей вершине, так как в противном случае, мы всегда сможем добавить как минимум одну вершину в путь (вершину, из которой есть путь в данную)
+
+\end{document}
