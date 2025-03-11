@@ -1,0 +1,343 @@
+\documentclass[12pt]{extreport}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}        % Кодировка входного документа;
+                                    % при необходимости, вместо cp1251
+                                    % можно указать cp866 (Alt-кодировка
+                                    % DOS) или koi8-r.
+
+\usepackage[english,russian]{babel} % Включение русификации, русских и
+                                    % английских стилей и переносов
+%%\usepackage{a4}
+%%\usepackage{moreverb}
+\usepackage{amsmath,amsfonts,amsthm,amssymb,amsbsy,amstext,amscd,amsxtra,multicol}
+\usepackage{indentfirst}
+\usepackage{verbatim}
+\usepackage{tikz} %Рисование автоматов
+\usetikzlibrary{automata,positioning}
+\usepackage{multicol} %Несколько колонок
+\usepackage{graphicx}
+\usepackage[colorlinks,urlcolor=blue]{hyperref}
+\usepackage[stable]{footmisc}
+
+%% \voffset-5mm
+%% \def\baselinestretch{1.44}
+\renewcommand{\theequation}{\arabic{equation}}
+\def\hm#1{#1\nobreak\discretionary{}{\hbox{$#1$}}{}}
+\newtheorem{Lemma}{Лемма}
+\newtheorem{Remark}{Замечание}
+%%\newtheorem{Def}{Определение}
+\newtheorem{Claim}{Утверждение}
+\newtheorem{Cor}{Следствие}
+\newtheorem{Theorem}{Теорема}
+\theoremstyle{definition}
+\newtheorem{Example}{Пример}
+\newtheorem*{known}{Теорема}
+\def\proofname{Доказательство}
+\theoremstyle{definition}
+\newtheorem{Def}{Определение}
+
+%% \newenvironment{Example} % имя окружения
+%% {\par\noindent{\bf Пример.}} % команды для \begin
+%% {\hfill$\scriptstyle\qed$} % команды для \end
+
+
+
+
+
+
+%\date{22 июня 2011 г.}
+\let\leq\leqslant
+\let\geq\geqslant
+\def\MT{\mathrm{MT}}
+%Обозначения ``ажуром''
+\def\BB{\mathbb B}
+\def\CC{\mathbb C}
+\def\RR{\mathbb R}
+\def\SS{\mathbb S}
+\def\ZZ{\mathbb Z}
+\def\NN{\mathbb N}
+\def\FF{\mathbb F}
+%греческие буквы
+\let\epsilon\varepsilon
+\let\es\varnothing
+\let\eps\varepsilon
+\let\al\alpha
+\let\sg\sigma
+\let\ga\gamma
+\let\ph\varphi
+\let\om\omega
+\let\ld\lambda
+\let\Ld\Lambda
+\let\vk\varkappa
+\let\Om\Omega
+\def\abstractname{}
+
+\def\R{{\cal R}}
+\def\A{{\cal A}}
+\def\B{{\cal B}}
+\def\C{{\cal C}}
+\def\D{{\cal D}}
+
+%классы сложности
+\def\REG{{\mathsf{REG}}}
+\def\CFL{{\mathsf{CFL}}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Problems macros  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%% Enumerations %%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Rnum}[1]{\expandafter{\romannumeral #1\relax}}
+\newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+%%%%%%%%%%%%%%%%%%%%% EOF Enumerations %%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{xparse}
+\usepackage{ifthen}
+\usepackage{bm} %%% bf in math mode
+\usepackage{color}
+%\usepackage[usenames,dvipsnames]{xcolor}
+
+\definecolor{Gray555}{HTML}{555555}
+\definecolor{Gray444}{HTML}{444444}
+\definecolor{Gray333}{HTML}{333333}
+
+
+\newcounter{problem}
+\newcounter{uproblem}
+\newcounter{subproblem}
+\newcounter{prvar}
+
+\def\beforPRskip{
+	\bigskip
+	%\vspace*{2ex}
+}
+
+\def\PRSUBskip{
+	\medskip
+}
+
+
+\def\pr{\beforPRskip\noindent\stepcounter{problem}{\bf \theproblem .\;}\setcounter{subproblem}{0}}
+\def\pru{\beforPRskip\noindent\stepcounter{problem}{\bf $\mathbf{\theproblem}^\circ$\!\!.\;}\setcounter{subproblem}{0}}
+\def\prstar{\beforPRskip\noindent\stepcounter{problem}{\bf $\mathbf{\theproblem}^*$\negthickspace.}\setcounter{subproblem}{0}\;}
+\def\prpfrom[#1]{\beforPRskip\noindent\stepcounter{problem}{\bf Задача \theproblem~(№#1 из задания).  }\setcounter{subproblem}{0} }
+\def\prp{\beforPRskip\noindent\stepcounter{problem}{\bf Задача \theproblem .  }\setcounter{subproblem}{0} }
+
+\def\prpvar{\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{1}{\bf Задача \theproblem \;$\langle${\rm\Rnum{\theprvar}}$\rangle$.}\setcounter{subproblem}{0}\;}
+\def\prpv{\beforPRskip\noindent\stepcounter{prvar}{\bf Задача \theproblem \,$\bm\langle$\bracketspace{{\rm\Rnum{\theprvar}}}$\bm\rangle$.  }\setcounter{subproblem}{0} }
+\def\prv{\beforPRskip\noindent\stepcounter{prvar}{\bf \theproblem\,$\bm\langle$\bracketspace{{\rm\Rnum{\theprvar}}}$\bm\rangle$}.\setcounter{subproblem}{0} }
+
+\def\prpstar{\beforPRskip\noindent\stepcounter{problem}{\bf Задача $\bf\theproblem^*$\negthickspace.  }\setcounter{subproblem}{0} }
+\def\prdag{\beforPRskip\noindent\stepcounter{problem}{\bf Задача $\theproblem^{^\dagger}$\negthickspace\,.  }\setcounter{subproblem}{0} }
+\def\upr{\beforPRskip\noindent\stepcounter{uproblem}{\bf Упражнение \theuproblem .  }\setcounter{subproblem}{0} }
+%\def\prp{\vspace{5pt}\stepcounter{problem}{\bf Задача \theproblem .  } }
+%\def\prs{\vspace{5pt}\stepcounter{problem}{\bf \theproblem .*   }
+\def\prsub{\PRSUBskip\noindent\stepcounter{subproblem}{\sf \thesubproblem .} }
+\def\prsubr{\PRSUBskip\noindent\stepcounter{subproblem}{\bf \asbuk{subproblem})}\;}
+\def\prsubstar{\PRSUBskip\noindent\stepcounter{subproblem}{\rm $\thesubproblem^*$\negthickspace.  } }
+\def\prsubrstar{\PRSUBskip\noindent\stepcounter{subproblem}{$\text{\bf \asbuk{subproblem}}^*\mathbf{)}$}\;}
+
+\newcommand{\bracketspace}[1]{\phantom{(}\!\!{#1}\!\!\phantom{)}}
+
+\DeclareDocumentCommand{\Prpvar}{ O{null} O{} }{
+	\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{1}{\bf Задача \theproblem
+% 	\ifthenelse{\equal{#1}{null}}{  }{ {\sf $\bm\langle$\bracketspace{#1}$\bm\rangle$}}
+%	~\!\!(\bracketspace{{\rm\Rnum{\theprvar}}}).  }\setcounter{subproblem}{0}
+%	\;(\bracketspace{{\rm\Rnum{\theprvar}}})}\setcounter{subproblem}{0}
+%
+	\,{\sf $\bm\langle$\bracketspace{{\rm\Rnum{\theprvar}}}$\bm\rangle$}
+	~\!\!\! \ifthenelse{\equal{#1}{null}}{\!}{{\sf(\bracketspace{#1})}}}.
+
+}
+%\DeclareDocumentCommand{\Prpvar}{ O{level} O{meta} m }{\prpvar}
+
+
+\DeclareDocumentCommand{\Prp}{ O{null} O{null} }{\setcounter{subproblem}{0}
+	\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{0}{\bf Задача \theproblem
+	~\!\!\! \ifthenelse{\equal{#1}{null}}{\!}{{\sf(\bracketspace{#1})}}
+	 \ifthenelse{\equal{#2}{null}}{\!\!}{{\sf [\color{Gray444}\,\bracketspace{{\fontfamily{afd}\selectfont#2}}\,]}}}.}
+
+\DeclareDocumentCommand{\Pr}{ O{null} O{null} }{\setcounter{subproblem}{0}
+	\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{0}{\bf\theproblem
+	~\!\!\! \ifthenelse{\equal{#1}{null}}{\!\!}{{\sf(\bracketspace{#1})}}
+	 \ifthenelse{\equal{#2}{null}}{\!\!}{{\sf [\color{Gray444}\,\bracketspace{{\fontfamily{afd}\selectfont#2}}\,]}}}.}
+
+%\DeclareDocumentCommand{\Prp}{ O{level} O{meta} }
+
+\DeclareDocumentCommand{\Prps}{ O{null} O{null} }{\setcounter{subproblem}{0}
+	\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{0}{\bf Задача $\bm\theproblem^* $
+	~\!\!\! \ifthenelse{\equal{#1}{null}}{\!}{{\sf(\bracketspace{#1})}}
+	 \ifthenelse{\equal{#2}{null}}{\!\!}{{\sf [\color{Gray444}\,\bracketspace{{\fontfamily{afd}\selectfont#2}}\,]}}}.
+}
+
+\DeclareDocumentCommand{\Prpd}{ O{null} O{null} }{\setcounter{subproblem}{0}
+	\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{0}{\bf Задача $\bm\theproblem^\dagger$
+	~\!\!\! \ifthenelse{\equal{#1}{null}}{\!}{{\sf(\bracketspace{#1})}}
+	 \ifthenelse{\equal{#2}{null}}{\!\!}{{\sf [\color{Gray444}\,\bracketspace{{\fontfamily{afd}\selectfont#2}}\,]}}}.
+}
+
+
+\def\prend{
+	\bigskip
+%	\bigskip
+}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% EOF Problems macros  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%\usepackage{erewhon}
+%\usepackage{heuristica}
+%\usepackage{gentium}
+
+\usepackage[portrait, top=3cm, bottom=1.5cm, left=3cm, right=2cm]{geometry}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\lhead{\fontfamily{fca}\selectfont {Алгоритмы. Пономаренко Алексей.} }
+%\lhead{ \bf  {ТРЯП. } Семинар 1 }
+%\chead{\fontfamily{fca}\selectfont {Вариант 1}}
+\rhead{\fontfamily{fca}\selectfont Домашнее задание 1}
+%\rhead{\small 01.09.2016}
+\cfoot{}
+
+\usepackage{titlesec}
+\titleformat{\section}[block]{\Large\bfseries\filcenter {\setcounter{problem}{0}}  }{}{1em}{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Обозначения и операции %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+                                                                    
+\newcommand{\divisible}{\mathop{\raisebox{-2pt}{\vdots}}}           
+\let\Om\Omega
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Shen Macroses %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\w}[1]{{\hbox{\texttt{#1}}}}
+
+\newcommand{\comments}[2][Комментарий]{
+\medskip
+	\noindent{\bfseries #1: }{\textsl{#2}}
+%\medskip	
+}
+
+\begin{document}
+
+\Pr \hspace{0.1cm} Рассмотрим каждый из пунктов:
+
+\prsubr Распишем по определению : $\exists N, C > 0 : \forall n \geq N $ выполнено :
+
+\medskip
+
+\centering $ n \leq C * n \log n $
+
+\medskip
+
+\raggedright 
+\hspace{4mm} Сокращаем на n и находим $ N = 2, C = 1 $. 
+
+\medskip
+
+\hspace{4mm} Таким образом, мы нашли такие константы $ N и C $, при которых опр-е вып-но, а значит, утрв-е а) ВЕРНО.
+
+\prsubr Воспользуемся известным фактом из матанализа: 
+
+\medskip
+
+\centering $ \lim_{n\to\infty} \frac{\log n}{n^\varepsilon} = 0 $
+
+\medskip
+
+\raggedright \hspace{4mm} Распишем это по определению предела: 
+
+\centering $ \forall \varepsilon > 0, \forall C > 0 \hspace{0.1cm} \exists N \in \mathbb{N} : \forall n \geq N $ выполнено: $ \log n < C * n^\varepsilon $ (1)
+
+\medskip
+
+\raggedright \hspace{4mm} Теперь распишем по определению исходное выражение:
+
+\centering $ \exists \varepsilon, N, C > 0 : \forall n \geq N $ выполнено $ \log n \geq C'$ (2)
+
+\medskip
+
+\raggedright \hspace{4mm} Таким образом, из (1) следует, что (2) не может быть выполнено, то есть определение не выполняется, а значит, утв-е б) НЕВЕРНО
+
+\bigskip
+
+\Pr \hspace{0.1cm} Рассмотрим каждый пункт:
+
+\prsub \textbf{а)} Может. Простейший пример: $f(n) = n*\log n = O(n^2), g(n) = 1 = \Omega(1) = O(n)$
+
+\medskip
+
+\textbf{б)} Не может, т.к. наилучшая верхняя оценка это $O(n^2)$ (см.пункт 2)
+
+\medskip
+
+\prsub Верхняя оценка: 
+
+$$ h(n) = \cfrac{f(n)}{g(n)} \leq \cfrac{C_1*n^2}{C_2} = C*n^2 = O(n^2) $$
+
+\hspace{4mm} Нижняя оценка:
+
+$$ h(n) = \cfrac{f(n)}{g(n)} \geq \cfrac{f(n)}{C*n} $$
+
+\hspace{4mm} Далее заметим, что нижней асимптотической оценки $\Omega(f(n))$ нет, а это значит, что мы всегда можем ограничить ф-ю $f(n)$ снизу ф-ей вида $\cfrac{1}{n^k}, \forall k$. Теперь докажем, что наилучшей нижней оценки не существует. Пойдем от обратного. Пусть наилучшая нижняя оценка сущестует. Тогда, мы всегда сможем подобрать такую $k$, что мы сможем ограничить нашу оценку снизу. Это противоречит определению наилучшей нижней оценки, а значит ее нет.
+
+\Pr \hspace{1mm} Да, эквивалентно. Из опр-я студента следует наше определение, потому что в нашем еще есть ограничения на n, а у него такая константа C $\exists$ вообще $\forall$ n. Теперь нужно доказать, что верно обратное. Распишем наше опр-е и выведем из него опр-е студента: 
+
+$$ \exists N, C > 0 : \forall n \geq N \Rightarrow f(n) \leq C * g(n) $$
+
+\hspace{4mm} То есть $\exists$ такие n $\in [1;N) $, что f(n) > C * g(n). Но мы в праве "управлять"  константой C, и поэтому можем выбрать ее так, что даже при минимальном значении $min$ функции $g(n)$, она будет больше, чем максимальное значение max функции $f(n)$: $min = min_{0<n<N}g(n), max = max_{0<n<N}f(n) \Rightarrow C_{new} = \cfrac{max}{min}$. Теперь для константы $C_{new}$ определение выполняется, а значит мы получили эквивалентное определение. 
+
+\Pr \hspace{1mm} Везде в этой задаче я буду называть циклы for в том порядке, в котором они идут с самого внешнего к самому внутреннему сверху вниз!
+
+\hspace{4mm} \prsub Заметим, что итераторы во внутренних циклах не зависят от внешних итераторов. Это значит, что мы можем посчитать количесво выведенных слов, выраженных непосредственно через n.
+
+\hspace{4mm} \prsub Итак, количество выведенных слов в третьем цикле в точности равно $[\cfrac{n+1}{2}]$. Эта формула выведена так: количество выполненных циклов увеличивается на 1 при увеличении n на 2 (на кадом нечетном числе)
+
+\hspace{4mm} \prsub Количество выведенных слов в четвертом цикле в точности равно $\lceil \log_2 n \rceil$. Эта формула выведена так: количество выполненных циклов увеличивается на 1 при n = $2^k+1$, причем при n = 1 кол-во = 0, при n = 2 кол-во = 1.
+
+\hspace{4mm} \prsub Теперь заметим, что количество итераций внешнего цикла ровно такое же ($\lceil \log_2 n \rceil$), как и у четвертогг for.
+
+\hspace{4mm} \prsub Заметим, что количество итераций второго оператора for при фиксированном bound, равно в точности $2^{bound-1}$
+
+\hspace{4mm} \prsub Теперь посчитаем, сколько раз посчитаются внутренние циклы: 
+
+$$ \sum_{k=1}^{\lceil \log_2 n \rceil} 2^{k-1} $$
+
+\hspace{4mm} \prsub Итого, $$g(n) = \sum_{k=1}^{\lceil \log_2 n \rceil} 2^{k-1} * ([\cfrac{n+1}{2}] + \lceil \log_2 n \rceil) = ([\cfrac{n+1}{2}] + \lceil \log_2 n \rceil) * \sum_{k=1}^{\lceil \log_2 n \rceil} 2^{k-1} = $$ $$ =([\cfrac{n+1}{2}] + \lceil \log_2 n \rceil) * (2^{\lceil \log_2 n \rceil} - 1) = \Theta (n * (n + log_2 n))$$ 
+
+\Pr [Разобрана]
+
+\Pr \hspace{1mm} Выполним 3 пункта описания алгоритма:
+
+\hspace{4mm} \prsub(Сам алгоритм) Находим два максимума из первых эл-тов трех массивов, запоминая при этом номера массивов, в кот-х находятся максимумы и минимум. { Везде далее я буду называть массив с наименьшим текущим эл-том тот массив, не из которого мы взяли первый и второй максимумы }. Затем бежим по массиву с наименьшим первым эл-том до тех пор, пока либо 1) он не закончится, либо 2) пока не встретится эл-т $\geq$ чем второй максимум. При этом каждый раз увеличиваем счетчик count различных элементов. Далее у нас 3 ситуации: а) эл-т равен второму максимуму, б) эл-т $>$ второго максимума, в) массив закончился. Рассмотрим каждую из ситуаций: 
+
+\hspace{12mm} \textbf{а)} В таком случае, мы делаем count++, затем прыгаем на следующие эл-ты в массиве со вторым максимумом и в массиве с минимумом. Помещаем в переменную $max_2$ больший из них и дальше просто продолжаем идти по массиву с наименьшим новым эл-том и возвращаемся в начало алгоритма.
+
+\hspace{12mm} \textbf{б)} В этом случае мы сравниваем текущий эл-т из массива с наименьшим эл-том с первым максимумом, и если он больше, то во второй максимум помещаем текущий первый максимум, а в первый максимум - текущий элемент из первого массива. Иначе, помещаем текущий эл-т во второй максимум, а первый максимум оставляем. Далее просто продолжаем идти по массиву с наименьшим текущим эл-том и возвращаемся в начало алгоритма.
+
+\hspace{12mm} \textbf{в)} В этом случае мы идем по массиву со вторым максимумом, пока не встретим эл-т $\geq$ чем первый максимум или пока он не закончится. И проделываем процедуру, аналогичную пунктам \textbf{а)} и \textbf{б)}
+
+
+
+\hspace{4mm} \prsub(Корректность) Таким образом, мы 1 раз пробежимся по всем эл-там нашего массива, не посчитаем дважды ни один из одинаковых эл-тов благодаря бункту \textbf{а)}, а также наш алгоритм будет корректен, потому что каждый из массивов отсортирован по возрастанию и когда мы идем по "наименьшему" массиву, все его элементы до первого превышающего второй максимум гарантированно будут меньше и различны (из условия задачи).
+
+\hspace{4mm} \prsub(Сложность) T(n) = $O (n)$, потому что мы пробежимся по всем трем массивам ровно 1 раз выполнив при этом не более n сравнений, где n - общее кол-во эл-тов в массивах. S(n) = $O(1)$, потому что мы будем хранить в памяти лишь ограниченное число переменных (два первых максимума, номера массивов, в которых нах-ся максимумы и минимум, и еще пару необходимых переменных, чье количетсво никак не зависит от n).
+
+\Pr  \hspace{1mm} Выполним 3 пункта описания алгоритма:
+
+\hspace{4mm} \prsub(Сам алгоритм) Введем две вспомогательные переменные: $S_A$ и $S_B$ - суммы всех $a_i$ и $b_i$ сответственно. Изначально S, $S_A$ и $S_B$ обнуляем. При считывании первой пары эл-тов увеличиваем $S_A$ и $S_B$ на $a_1$ и $b_1$ сответственно. Далее на каждом шаге $S = S + S_A * b_i + S_B * a_i$ и так же увеличиваем $S_A$ и $S_B$ на $a_i$ и $b_i$ сответственно. Итого, у нас в каждый момент времени ответ будет лежать в S.
+
+\hspace{4mm} \prsub(Корректность) Корректность этого алгоритма проверяется через индукцию следующим образом: пусть верно для k эл-тов, тогда чтобы получить искомую сумму нам надо прибавить к $S_k$ $a_k * S_B + b_k * S_A$ (легко проверяется)
+
+\hspace{4mm} \prsub(Сложность) $T(n) = O(n)$, так как мы единожды пробегаемся по всем эл-там и выполняем $O(n)$ операций сложения. $S(n) = O(1)$, потому что мы используем конечное число переменных при решении задачи, чье количество никак не зависит от n.
+
+
+\end{document}

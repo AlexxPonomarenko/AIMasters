@@ -1,0 +1,249 @@
+\documentclass[12pt]{extreport}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}        % Кодировка входного документа;
+                                    % при необходимости, вместо cp1251
+                                    % можно указать cp866 (Alt-кодировка
+                                    % DOS) или koi8-r.
+
+\usepackage[english,russian]{babel} % Включение русификации, русских и
+                                    % английских стилей и переносов
+%%\usepackage{a4}
+%%\usepackage{moreverb}
+\usepackage{amsmath,amsfonts,amsthm,amssymb,amsbsy,amstext,amscd,amsxtra,multicol}
+\usepackage{indentfirst}
+\usepackage{verbatim}
+\usepackage{tikz} %Рисование автоматов
+\usetikzlibrary{automata,positioning}
+\usepackage{multicol} %Несколько колонок
+\usepackage{graphicx}
+\usepackage[colorlinks,urlcolor=blue]{hyperref}
+\usepackage[stable]{footmisc}
+
+%% \voffset-5mm
+%% \def\baselinestretch{1.44}
+\renewcommand{\theequation}{\arabic{equation}}
+\def\hm#1{#1\nobreak\discretionary{}{\hbox{$#1$}}{}}
+\newtheorem{Lemma}{Лемма}
+\newtheorem{Remark}{Замечание}
+%%\newtheorem{Def}{Определение}
+\newtheorem{Claim}{Утверждение}
+\newtheorem{Cor}{Следствие}
+\newtheorem{Theorem}{Теорема}
+\theoremstyle{definition}
+\newtheorem{Example}{Пример}
+\newtheorem*{known}{Теорема}
+\def\proofname{Доказательство}
+\theoremstyle{definition}
+\newtheorem{Def}{Определение}
+
+%% \newenvironment{Example} % имя окружения
+%% {\par\noindent{\bf Пример.}} % команды для \begin
+%% {\hfill$\scriptstyle\qed$} % команды для \end
+
+
+
+
+
+
+%\date{22 июня 2011 г.}
+\let\leq\leqslant
+\let\geq\geqslant
+\def\MT{\mathrm{MT}}
+%Обозначения ``ажуром''
+\def\BB{\mathbb B}
+\def\CC{\mathbb C}
+\def\RR{\mathbb R}
+\def\SS{\mathbb S}
+\def\ZZ{\mathbb Z}
+\def\NN{\mathbb N}
+\def\FF{\mathbb F}
+%греческие буквы
+\let\epsilon\varepsilon
+\let\es\varnothing
+\let\eps\varepsilon
+\let\al\alpha
+\let\sg\sigma
+\let\ga\gamma
+\let\ph\varphi
+\let\om\omega
+\let\ld\lambda
+\let\Ld\Lambda
+\let\vk\varkappa
+\let\Om\Omega
+\def\abstractname{}
+
+\def\R{{\cal R}}
+\def\A{{\cal A}}
+\def\B{{\cal B}}
+\def\C{{\cal C}}
+\def\D{{\cal D}}
+
+%классы сложности
+\def\REG{{\mathsf{REG}}}
+\def\CFL{{\mathsf{CFL}}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Problems macros  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%% Enumerations %%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Rnum}[1]{\expandafter{\romannumeral #1\relax}}
+\newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+%%%%%%%%%%%%%%%%%%%%% EOF Enumerations %%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{xparse}
+\usepackage{ifthen}
+\usepackage{bm} %%% bf in math mode
+\usepackage{color}
+%\usepackage[usenames,dvipsnames]{xcolor}
+
+\definecolor{Gray555}{HTML}{555555}
+\definecolor{Gray444}{HTML}{444444}
+\definecolor{Gray333}{HTML}{333333}
+
+
+\newcounter{problem}
+\newcounter{uproblem}
+\newcounter{subproblem}
+\newcounter{prvar}
+
+\def\beforPRskip{
+	\bigskip
+	%\vspace*{2ex}
+}
+
+\def\PRSUBskip{
+	\medskip
+}
+
+
+\def\pr{\beforPRskip\noindent\stepcounter{problem}{\bf \theproblem .\;}\setcounter{subproblem}{0}}
+\def\pru{\beforPRskip\noindent\stepcounter{problem}{\bf $\mathbf{\theproblem}^\circ$\!\!.\;}\setcounter{subproblem}{0}}
+\def\prstar{\beforPRskip\noindent\stepcounter{problem}{\bf $\mathbf{\theproblem}^*$\negthickspace.}\setcounter{subproblem}{0}\;}
+\def\prpfrom[#1]{\beforPRskip\noindent\stepcounter{problem}{\bf Задача \theproblem~(№#1 из задания).  }\setcounter{subproblem}{0} }
+\def\prp{\beforPRskip\noindent\stepcounter{problem}{\bf Задача \theproblem .  }\setcounter{subproblem}{0} }
+
+\def\prpvar{\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{1}{\bf Задача \theproblem \;$\langle${\rm\Rnum{\theprvar}}$\rangle$.}\setcounter{subproblem}{0}\;}
+\def\prpv{\beforPRskip\noindent\stepcounter{prvar}{\bf Задача \theproblem \,$\bm\langle$\bracketspace{{\rm\Rnum{\theprvar}}}$\bm\rangle$.  }\setcounter{subproblem}{0} }
+\def\prv{\beforPRskip\noindent\stepcounter{prvar}{\bf \theproblem\,$\bm\langle$\bracketspace{{\rm\Rnum{\theprvar}}}$\bm\rangle$}.\setcounter{subproblem}{0} }
+
+\def\prpstar{\beforPRskip\noindent\stepcounter{problem}{\bf Задача $\bf\theproblem^*$\negthickspace.  }\setcounter{subproblem}{0} }
+\def\prdag{\beforPRskip\noindent\stepcounter{problem}{\bf Задача $\theproblem^{^\dagger}$\negthickspace\,.  }\setcounter{subproblem}{0} }
+\def\upr{\beforPRskip\noindent\stepcounter{uproblem}{\bf Упражнение \theuproblem .  }\setcounter{subproblem}{0} }
+%\def\prp{\vspace{5pt}\stepcounter{problem}{\bf Задача \theproblem .  } }
+%\def\prs{\vspace{5pt}\stepcounter{problem}{\bf \theproblem .*   }
+\def\prsub{\PRSUBskip\noindent\stepcounter{subproblem}{\sf \thesubproblem .} }
+\def\prsubr{\PRSUBskip\noindent\stepcounter{subproblem}{\bf \asbuk{subproblem})}\;}
+\def\prsubstar{\PRSUBskip\noindent\stepcounter{subproblem}{\rm $\thesubproblem^*$\negthickspace.  } }
+\def\prsubrstar{\PRSUBskip\noindent\stepcounter{subproblem}{$\text{\bf \asbuk{subproblem}}^*\mathbf{)}$}\;}
+
+\newcommand{\bracketspace}[1]{\phantom{(}\!\!{#1}\!\!\phantom{)}}
+
+\DeclareDocumentCommand{\Prpvar}{ O{null} O{} }{
+	\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{1}{\bf Задача \theproblem
+% 	\ifthenelse{\equal{#1}{null}}{  }{ {\sf $\bm\langle$\bracketspace{#1}$\bm\rangle$}}
+%	~\!\!(\bracketspace{{\rm\Rnum{\theprvar}}}).  }\setcounter{subproblem}{0}
+%	\;(\bracketspace{{\rm\Rnum{\theprvar}}})}\setcounter{subproblem}{0}
+%
+	\,{\sf $\bm\langle$\bracketspace{{\rm\Rnum{\theprvar}}}$\bm\rangle$}
+	~\!\!\! \ifthenelse{\equal{#1}{null}}{\!}{{\sf(\bracketspace{#1})}}}.
+
+}
+%\DeclareDocumentCommand{\Prpvar}{ O{level} O{meta} m }{\prpvar}
+
+
+\DeclareDocumentCommand{\Prp}{ O{null} O{null} }{\setcounter{subproblem}{0}
+	\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{0}{\bf Задача \theproblem
+	~\!\!\! \ifthenelse{\equal{#1}{null}}{\!}{{\sf(\bracketspace{#1})}}
+	 \ifthenelse{\equal{#2}{null}}{\!\!}{{\sf [\color{Gray444}\,\bracketspace{{\fontfamily{afd}\selectfont#2}}\,]}}}.}
+
+\DeclareDocumentCommand{\Pr}{ O{null} O{null} }{\setcounter{subproblem}{0}
+	\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{0}{\bf\theproblem
+	~\!\!\! \ifthenelse{\equal{#1}{null}}{\!\!}{{\sf(\bracketspace{#1})}}
+	 \ifthenelse{\equal{#2}{null}}{\!\!}{{\sf [\color{Gray444}\,\bracketspace{{\fontfamily{afd}\selectfont#2}}\,]}}}.}
+
+%\DeclareDocumentCommand{\Prp}{ O{level} O{meta} }
+
+\DeclareDocumentCommand{\Prps}{ O{null} O{null} }{\setcounter{subproblem}{0}
+	\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{0}{\bf Задача $\bm\theproblem^* $
+	~\!\!\! \ifthenelse{\equal{#1}{null}}{\!}{{\sf(\bracketspace{#1})}}
+	 \ifthenelse{\equal{#2}{null}}{\!\!}{{\sf [\color{Gray444}\,\bracketspace{{\fontfamily{afd}\selectfont#2}}\,]}}}.
+}
+
+\DeclareDocumentCommand{\Prpd}{ O{null} O{null} }{\setcounter{subproblem}{0}
+	\beforPRskip\noindent\stepcounter{problem}\setcounter{prvar}{0}{\bf Задача $\bm\theproblem^\dagger$
+	~\!\!\! \ifthenelse{\equal{#1}{null}}{\!}{{\sf(\bracketspace{#1})}}
+	 \ifthenelse{\equal{#2}{null}}{\!\!}{{\sf [\color{Gray444}\,\bracketspace{{\fontfamily{afd}\selectfont#2}}\,]}}}.
+}
+
+
+\def\prend{
+	\bigskip
+%	\bigskip
+}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% EOF Problems macros  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%\usepackage{erewhon}
+%\usepackage{heuristica}
+%\usepackage{gentium}
+
+\usepackage[portrait, top=3cm, bottom=1.5cm, left=3cm, right=2cm]{geometry}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\lhead{\fontfamily{fca}\selectfont {Алгоритмы. Пономаренко Алексей.} }
+%\lhead{ \bf  {ТРЯП. } Семинар 1 }
+%\chead{\fontfamily{fca}\selectfont {Вариант 1}}
+\rhead{\fontfamily{fca}\selectfont Домашнее задание 4}
+%\rhead{\small 01.09.2016}
+\cfoot{}
+
+\usepackage{titlesec}
+\titleformat{\section}[block]{\Large\bfseries\filcenter {\setcounter{problem}{0}}  }{}{1em}{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Обозначения и операции %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+                                                                    
+\newcommand{\divisible}{\mathop{\raisebox{-2pt}{\vdots}}}           
+\let\Om\Omega
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Shen Macroses %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\w}[1]{{\hbox{\texttt{#1}}}}
+
+\newcommand{\comments}[2][Комментарий]{
+\medskip
+	\noindent{\bfseries #1: }{\textsl{#2}}
+%\medskip	
+}
+
+\begin{document}
+
+\Pr \hspace{1mm} Эту задачу можно решить равносильно двумя способами:
+
+\hspace{5mm} \prsub Пробежаться по массиву 5 раз, в каждый из которых ставить в начало массива $(k-1)$-ый остаток от деления. Тогда сложность алгоритма будет линейной, т.к. один пробег по массиву, например, двумя указателями, имеет сложность $O(n)$. И таких пробегов будет ровно 5 (это константа, поэтому никак не повлияет на итоговую сложность), а значит итоговая сложность будет равна $5 * O(n) = O(n)$.
+
+\hspace{5mm} \prsub В этом варианте можно сделать 5 partion-ов с последовательно возрастающими от 0 до 4 (остатки от деления на 5) предикатами. Тогда опять же, сложность будет $O(n)$
+
+\Pr \hspace{1mm} В данной задаче достаточно найти $(\lceil \frac{n}{3} \rceil)$-ую порядковую статистику по длине отрезков. Тогда ответом на задачу будут все точки, лежащие внутри $(\lceil \frac{n}{3} \rceil)$-ого отрезка. Почему? Благодаря вложенности отрезков, все точки $(\lceil \frac{n}{3} \rceil)$-ого отрезка принадлежат еще $\frac{2n}{3} - 1$ отрезкам, в которые этот отрезок сам вложен. Соответсвенно, для всех отрезков, вложенных в найденный, точки будут принадлежать еще большему количеству отрезков.
+
+\Pr \hspace{1mm} В данной задаче я рассматриваю быструю сортировку с детерминированным опорным элементом. В вероятностном случае будет то же самое, просто пример под "худший случай" будет более сложным. Теперь рассмотрим по пунктам:
+
+\hspace{5mm} \prsub В наихудшем случае нам на вход будет подан уже отсортированный по возрастанию массив. В таком случае функция рекрсивно запустится сначала от $l$ до $r-1$ потом до $r-2$ и т.д. Это значит, что глубина рекурсии будет сравнима с $n$
+
+\hspace{5mm} \prsub Изменить алгоритм можно след.образом: в качестве опорного эл-та будем исп-ть $\frac{n}{2}$-ую порядковую статистику, размещенную на своей позиции. В таком случае слева от нее будут эл-ты $\leq$ ее самой, а справа - $>$. В такой ситуации глубина рекурсии будет сравнима с $\log_2(n)$
+
+\Pr \hspace{1mm} Для минимизации нужно найти $n+1$-ую порядковую статистику. Это следует из того, что минимум будет находиться в одной из точек ломаной. А именно в такой порядковой статистике потому что слева ф-я будет убывать, а справа возрастать. Так случится благодаря тому, что модули до этого числа раскроются с $-$, а после него - с $+$. Тогда, все $s$ сократятся  
+
+\Pr \hspace{1mm} Отсортируем массив A, используя сортировку со сложностью $O(n * \log_2(n)$, например, MergeSort. Затем ставим два указателя в начало отсортированного массива и в конец. Далее идем по массиву: если сумма элементов, на которые в данных момент указывают указатели, больше нужной, то двигаем правый указатель влево на 1, иначе - вправо на 1. Идем до тех пор, пока указатели не встретятся или не будет получена необходимая сумма. Сложность: $O(n * \log_2(n) + O(n) = O(n * \log_2(n)$. Корректность: идя по массиву таким образом, мы рассматриваем всевозможные пары слагаемых, уменьшая или увеличивая нужную сумму. Благодаря тому, что массив отсортирован, все работает.
+
+\end{document}
